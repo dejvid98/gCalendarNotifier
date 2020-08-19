@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 25rem;
+  padding: 0rem 8rem 2rem 8rem;
+
+  h1 {
+    color: #364f6b;
+    letter-spacing: 1.5px;
+  }
+
+  .input {
+    margin: 1rem;
+    width: 15rem;
+  }
+
+  .createButton {
+    margin-top: 2rem;
+    background-color: #fc5185;
+    font-weight: 500;
+  }
+}
+
+.dateTime {
+  width: 11.1rem;
+}

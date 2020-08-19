@@ -3,4 +3,16 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  border-radius: 20px;
+
+  .illustrationContainer {
+    background-color: #2cb4ff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    padding: 5rem;
+    img {
+      height: 27.5rem;
+    }
+  }
 }
