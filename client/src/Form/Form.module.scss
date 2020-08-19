@@ -12,17 +12,40 @@
   }
 
   .input {
-    margin: 1rem;
-    width: 15rem;
+    margin: 1.2rem;
+    width: 19rem;
   }
 
-  .createButton {
+  .submitButton {
     margin-top: 2rem;
     background-color: #fc5185;
     font-weight: 500;
   }
+
+  .errorWrapper {
+    animation: moveInFromRight linear 0.2s;
+    background-color: #ff5e5e;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.5rem 4rem 0.5rem 4rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .dateTime {
-  width: 11.1rem;
+  width: 9rem;
+  position: relative;
+  left: 0.2rem;
+}
+
+@keyframes moveInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
 }

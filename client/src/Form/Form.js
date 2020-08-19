@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import validator from 'validator';
 import styles from './Form.module.scss';
 import TextField from '@material-ui/core/TextField';
 import DatePicker from './DatePicker';
@@ -8,43 +9,98 @@ const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [nameError, setNameError] = useState(false);
+  const [numberError, setNumberError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [dateError, setDateError] = useState(false);
+
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
+
+  const validateInputs = () => {
+    if (!name) {
+      setError('Please enter a valid name');
+      setNameError(true);
+      return false;
+    }
+
+    if (number.length < 8 || !validator.isNumeric(number)) {
+      setError('Please enter a valid phone number');
+      setNumberError(true);
+      return false;
+    }
+
+    if (!email || !validator.isEmail(email)) {
+      setError('Please enter a valid email');
+      setEmailError(true);
+      return false;
+    }
+
+    if (!date || !time) {
+      setError('Please enter a valid date/time');
+      setDateError(true);
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = () => {
+    validateInputs();
+  };
 
   return (
     <div className={styles.container}>
       <h1>Welcome!</h1>
+      {error ? <div className={styles.errorWrapper}>{error}</div> : null}
       <TextField
         id='standard-basic'
         label='Name'
         className={styles.input}
         variant='outlined'
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        error={nameError}
+        onChange={(e) => {
+          setError('');
+          setNameError(false);
+          setName(e.target.value);
+        }}
       />
       <TextField
         id='standard-basic'
-        label='Phone'
+        label='Phone number'
         variant='outlined'
         className={styles.input}
         value={number}
-        onChange={(e) => setNumber(e.target.value)}
+        error={numberError}
+        onChange={(e) => {
+          setError('');
+          setNumberError(false);
+          setNumber(e.target.value);
+        }}
       />
       <TextField
         id='standard-basic'
         label='Email'
         variant='outlined'
         className={styles.input}
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
+        value={email}
+        error={emailError}
+        onChange={(e) => {
+          setError('');
+          setEmailError(false);
+          setEmail(e.target.value);
+        }}
       />
       <DatePicker date={date} time={time} setDate={setDate} setTime={setTime} />
       <Button
         variant='contained'
         color='secondary'
-        className={styles.createButton}
+        className={styles.submitButton}
+        onClick={handleSubmit}
       >
-        CREATE
+        Submit
       </Button>
     </div>
   );
