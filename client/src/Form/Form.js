@@ -14,10 +14,10 @@ const Form = ({ createAnEvent }) => {
   const [nameError, setNameError] = useState(false);
   const [numberError, setNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
   const [captcha, setCaptcha] = useState(false);
 
-  const verifyCallback = () => {
+  const verifyCallback = (resp) => {
     setCaptcha(true);
   };
 
@@ -104,16 +104,17 @@ const Form = ({ createAnEvent }) => {
         }}
       />
       <DatePicker date={date} setDate={setDate} />
+      <div className={styles.captchaWrapper}>
+        <Recaptcha
+          sitekey='6LciTMEZAAAAAEzHTIe0cUGo4zE12uZ-H3DA26LH'
+          verifyCallback={verifyCallback}
+        />
+      </div>
 
-      <Recaptcha
-        sitekey='6LciTMEZAAAAAEzHTIe0cUGo4zE12uZ-H3DA26LH'
-        verifyCallback={verifyCallback}
-      />
       <Button
         variant='contained'
         color='secondary'
         className={styles.submitButton}
-        verifyCallback={verifyCallback}
         onClick={handleSubmit}
       >
         Submit
