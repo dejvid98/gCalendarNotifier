@@ -18,7 +18,7 @@ const Form = ({ createAnEvent }) => {
   const [captcha, setCaptcha] = useState(false);
 
   const verifyCallback = (resp) => {
-    setCaptcha(true);
+    if (resp) setCaptcha(true);
   };
 
   const validateInputs = () => {
