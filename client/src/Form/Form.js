@@ -4,6 +4,7 @@ import styles from './Form.module.scss';
 import TextField from '@material-ui/core/TextField';
 import DatePicker from './DatePicker';
 import Button from '@material-ui/core/Button';
+import Recaptcha from 'react-recaptcha';
 
 const Form = ({ createAnEvent }) => {
   const [name, setName] = useState('');
@@ -14,8 +15,19 @@ const Form = ({ createAnEvent }) => {
   const [numberError, setNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [date, setDate] = useState();
+  const [captcha, setCaptcha] = useState(false);
+
+  const verifyCallback = () => {
+    setCaptcha(true);
+  };
 
   const validateInputs = () => {
+    if (!captcha) {
+      setError('Please verify captcha');
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+
     if (!name) {
       setError('Please enter a valid name');
       setNameError(true);
@@ -53,7 +65,7 @@ const Form = ({ createAnEvent }) => {
       <h1>Welcome!</h1>
       {error ? <div className={styles.errorWrapper}>{error}</div> : null}
       <TextField
-        id='standard-basic'
+        id='standard-basic1'
         label='Name'
         className={styles.input}
         variant='outlined'
@@ -66,7 +78,7 @@ const Form = ({ createAnEvent }) => {
         }}
       />
       <TextField
-        id='standard-basic'
+        id='standard-basic2'
         label='Phone number'
         variant='outlined'
         className={styles.input}
@@ -79,7 +91,7 @@ const Form = ({ createAnEvent }) => {
         }}
       />
       <TextField
-        id='standard-basic'
+        id='standard-basic3'
         label='Email'
         variant='outlined'
         className={styles.input}
@@ -92,10 +104,16 @@ const Form = ({ createAnEvent }) => {
         }}
       />
       <DatePicker date={date} setDate={setDate} />
+
+      <Recaptcha
+        sitekey='6LciTMEZAAAAAEzHTIe0cUGo4zE12uZ-H3DA26LH'
+        verifyCallback={verifyCallback}
+      />
       <Button
         variant='contained'
         color='secondary'
         className={styles.submitButton}
+        verifyCallback={verifyCallback}
         onClick={handleSubmit}
       >
         Submit
