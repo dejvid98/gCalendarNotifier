@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import DatePicker from './DatePicker';
 import Button from '@material-ui/core/Button';
 
-const Form = () => {
+const Form = ({ createAnEvent }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -13,10 +13,7 @@ const Form = () => {
   const [nameError, setNameError] = useState(false);
   const [numberError, setNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  const [dateError, setDateError] = useState(false);
-
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [date, setDate] = useState();
 
   const validateInputs = () => {
     if (!name) {
@@ -37,9 +34,8 @@ const Form = () => {
       return false;
     }
 
-    if (!date || !time) {
+    if (!date) {
       setError('Please enter a valid date/time');
-      setDateError(true);
       return false;
     }
 
@@ -47,7 +43,9 @@ const Form = () => {
   };
 
   const handleSubmit = () => {
-    validateInputs();
+    if (validateInputs()) {
+      createAnEvent(name, email, date);
+    }
   };
 
   return (
@@ -93,7 +91,7 @@ const Form = () => {
           setEmail(e.target.value);
         }}
       />
-      <DatePicker date={date} time={time} setDate={setDate} setTime={setTime} />
+      <DatePicker date={date} setDate={setDate} />
       <Button
         variant='contained'
         color='secondary'

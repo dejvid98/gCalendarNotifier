@@ -4,15 +4,31 @@
   align-items: center;
   background-color: #fff;
   border-radius: 20px;
+  animation: moveInFromBottom 0.4s;
 
   .illustrationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #2cb4ff;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-
     padding: 5rem;
+    height: 30rem;
+
     img {
-      height: 27.5rem;
+      height: 24.5rem;
     }
+  }
+}
+
+@keyframes moveInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(6rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

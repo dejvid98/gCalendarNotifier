@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  animation: moveInFromBottom 0.4s;
+
+  .notificationText {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 3rem;
+
+    .goBackButton {
+      margin-top: 2rem;
+      background-color: #2cb4ff;
+      padding: 0.5rem 2rem;
+      border-radius: 10rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      color: #364f6b;
+      letter-spacing: 1px;
+    }
+
+    p {
+      color: #777;
+      font-size: 1.5rem;
+      width: 38rem;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes moveInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(6rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

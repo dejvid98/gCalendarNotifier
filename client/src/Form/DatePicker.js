@@ -9,11 +9,10 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function MaterialUIPickers() {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+export default function MaterialUIPickers({ date, setDate }) {
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    console.log(date._d);
+    setDate(date._d);
   };
 
   return (
@@ -26,7 +25,7 @@ export default function MaterialUIPickers() {
           margin='normal'
           id='date-picker-inline'
           label='Date'
-          value={selectedDate}
+          value={date}
           onChange={handleDateChange}
           className={styles.dateTime}
           KeyboardButtonProps={{
@@ -37,7 +36,7 @@ export default function MaterialUIPickers() {
           margin='normal'
           id='time-picker'
           label='Time'
-          value={selectedDate}
+          value={date}
           onChange={handleDateChange}
           className={styles.dateTime}
           KeyboardButtonProps={{
